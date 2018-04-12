@@ -1,0 +1,98 @@
+
+
+
+
+
+
+ <% include ./partials/header%>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+  
+<div class='button_container search'>
+        <form method='get'>
+            <input type="text" name="search" id='search' placeholder="Enter an ingredient...">
+            <input type='submit' class='button' id='SearchButton' value='Search' />
+        </form>
+    </div>
+    
+   
+
+
+<div class="container-fluid" >
+
+  <div class="row">
+      <% recipes.forEach(function(recipe) { %>
+      
+
+      <div class="card col-3 s12 m6 l3" style="overflow: visible;">
+        <div class="card-image recipe-image">
+        
+            <img src="<%= recipe.image %>" class="activator" alt='<%= recipe.title %>'>
+        </div>
+         <form action="/recipes/<%= recipe._id %>?_method=PUT" method="POST">
+        <button type="submit" class="status">Save</button>
+     </form>
+        <div class="card-content">
+            <span class="card-title"><%= recipe.title %>
+            </span>
+            <span class="card-title activator">Ingredients/Diet<i class="material-icons right tooltipped" data-position="top" data-tooltip="Click to view ingredients, Diet, and Health" data-original-title="" title="">more_vert</i></span>
+        </div>
+        <div class="card-action">
+            <a href="<%= recipe.link %>" target="_blank">More info
+            </a>
+            <i class="small fa fa-cutlery tooltipped" data-name="1" data-position="top" data-tooltip="Click to save recipe to Recipe box." data-original-title="" title="">
+            </i>
+          
+
+            
+        </div>
+        <div class="card-reveal" style="display: none; transform: translateY(0px);">
+            <span class="card-title">Ingredients
+                <i class="material-icons right">close
+                </i>
+            </span>
+
+            <% recipe.ingredientLines.forEach(function(ingr) { %>
+
+            <pre class="table"><code><%=  ingr %>.</code></pre>
+
+
+            <% }) %>
+            <h5 class="card-title"> Diet/Health </h5>
+              <% recipe.dietLabels.forEach(function(diet) { %>
+
+            <pre class="table"><code><%=  diet %>.</code></pre>
+
+
+            <% }) %>
+            <% recipe.healthLabels.forEach(function(health) { %>
+
+            <pre class="table"><code><%=  health %>.</code></pre>
+
+
+            <% }) %>
+           
+
+        </div>
+    </div>
+
+    <% }) %>
+    <div class="row">
+        <a class='btn-danger btn' id='topButton' href='#top'>Back To Top</a>
+ 
+
+    </div>
+  </div>
+
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+    <script> 
+    
+
+
+<% include  ./partials/footer%><div class='container'>

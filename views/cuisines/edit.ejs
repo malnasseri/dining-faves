@@ -1,0 +1,200 @@
+  <% include ../partials/header %>
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+  <!--Material icons-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+
+<div id="main">
+  
+  <span class="menu-span">
+ <span class="menu-btn tooltipped" data-position="right" data-tooltip="Menu" data-original-title="" title="" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>  
+   <a href="/cuisines"> <i class=" material-icons prefix home-i tooltipped" data-position="right" data-tooltip="Home Page" data-original-title="" title="">home</i></a>
+          <a href="/search"> <i class="material-icons prefix tooltipped" data-position="right" data-tooltip="Search for Recipes" data-original-title="" title=""">restaurant_menu</i></a>
+          <% if(!currentUser){ %>
+          <a href="/cuisines/new"><i class="material-icons prefix tooltipped" data-position="right" data-tooltip="Add a new Fave" data-original-title="" title="">camera_enhance</i></a>
+          <a href="/login"><i class="material-icons tooltipped" data-position="right" data-tooltip="Login" data-original-title="" title="">power_settings_new</i></a>
+          
+          <a href="/register"><i class="material-icons tooltipped" data-position="right" data-tooltip="SignUp" data-original-title="" title="">person_add</i></a>
+          <% } else { %>
+          
+          <a href="/cuisines/new"><i class="material-icons prefix tooltipped" data-position="right" data-tooltip="Add a new Fave" data-original-title="" title="">camera_enhance</i></a>
+
+
+
+          <a href="/user/<%=currentUser.id%>"><i class="material-icons prefix tooltipped" data-position="right" data-tooltip="<%= currentUser.username %>,s profile" data-original-title="" title="">face</i></a>
+          <a href="/logout"><i class="material-icons tooltipped" data-position="right" data-tooltip="Logout" data-original-title="" title="">highlight_off</i></a>
+          <% } %>
+</span>
+
+<div class="container-fluid edit-container"> 
+  <div class="row ">
+  
+    
+        <div class="col-md-7">
+            
+        <div class="card-panel ">
+              <form action="/cuisines/<%= cuisine._id %>?_method=PUT" method="POST">
+                  <div class="input-field ">
+                  <i class="material-icons prefix">restaurant_menu</i>
+                    <label for="name" >Name</label>
+                    
+                      <input class="form-control form-control-lg" type="text" name="cuisine[name]" value="<%= cuisine.name %>">
+                  </div>
+
+                  
+
+                  <div class="input-field">
+                  <i class="material-icons prefix">monetization_on</i>
+                      <label for="cost">Cost</label>
+                      
+                      <input class="form-control form-control-lg" type="number" name="cuisine[cost]" value="<%= cuisine.cost %>" step="0.01" min="0" required>
+                  </div>
+
+                  <div class="input-field">
+                  <i class="material-icons prefix">room</i>
+                    <label for="location">Location</label>
+                    
+                    <input class="form-control form-control-lg" type="text" name="cuisine[location]" id="location" value="<%= cuisine.location %>">
+                  </div>
+
+                  <div class="input-field">
+                  <i class="material-icons prefix">restaurant</i>
+                    <label for="restaurant" >Restaurant</label>
+                   
+                    <input class="form-control form-control-lg" type="text" name="cuisine[restaurant]" value="<%= cuisine.restaurant %>">
+                  </div>
+
+
+                  <div class="input-field">
+                  <i class="material-icons prefix">rate_review</i>
+                      <label for="description">Review</label>
+                      
+                      <input class="form-control form-control-lg"  type="text" name="cuisine[description]" value="<%= cuisine.description %>">
+                  </div>
+
+                 <div class="input-field">
+                    <button class="btn btn-lg btn-primary btn-block update-btn">Update!</button>
+                </div>
+               
+              </form>
+              <a  style="margin-top:10px" class="btn btn-lg btn-primary update-btn" href="/cuisines/<%= cuisine._id %>">Go Back </a>
+          </div>
+          </div>
+             
+        
+   
+
+ <div class="col-md-5">
+
+    <div class="card mb-4 box-shadow">
+                       
+          
+            <a href="/cuisines/<%= cuisine._id %>">
+                <img class="card-img-top" height="170" width="273" src="<%=cuisine.image %>" alt="<%= cuisine.name %>">  
+            </a>
+
+         
+
+
+
+
+              <div class="card-body cuisine-card-body">
+              <div class="text-center cuisine-name">
+              <a class="card-title cuisine-title " href="/cuisines/<%= cuisine._id %>">
+                <h5 class="card-title"><%= cuisine.name %> 
+              </a>
+              </h5>
+
+              </div>
+               <p class="card-text restaurant">At <%= cuisine.restaurant %>
+                </p>
+
+
+                
+               
+
+
+                <p class="card-text card-user">
+                  <em>
+
+                    
+                    <p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <%= cuisine.location %>
+                    </p>
+
+                     
+
+                    
+
+                    
+                  </em>
+                  <span class="right" style=" font-size: 104%; margin-top: -1.7px;"><small><strong><%= moment(cuisine.createdAt).fromNow() %></strong></small></span>
+
+                </p>
+ 
+
+
+                <p class="card-text card-link"><%= cuisine.description %>
+                </p>
+
+                <div class="text-center cuisine-icons">
+
+
+ 
+                      
+                        
+                    
+
+
+
+
+
+
+                 <a  href="/cuisines/<%= cuisine._id %>/comments/new"><span  comment-img"><img  height="36" width="36" src="/../images/comment1.jpg" alt="Comments: "></a>
+
+
+                     
+                      <%= cuisine.commentsCount %></span>
+                     
+                   
+                      <a href="/cuisines/<%= cuisine._id %>">
+                    <span  likes-img"><img  height="34" width="34" src="/../images/thumb-up-icon.jpg" alt="Likes: "> </a><%= cuisine.votes %></span>
+                  
+
+
+
+                
+
+
+
+            
+        </div>
+      </div>
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+  <% include ../partials/footer %>
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+

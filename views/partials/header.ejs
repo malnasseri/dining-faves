@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Make site responsive on mobile/tablet -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DINING FAVES</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="/stylesheets/main.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="mySidenav" class="sidenav">
+  <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+    <a  class="side-nav-logo" href="/">DINING FAVES</a>
+
+      
+          <a class="home-side-a " href="/cuisines">Home</a>
+          <a class="recipes-a" href="/search"> RecipesOnWeb </a>
+          <% if(!currentUser){ %>
+          <a class="addNew-a" href="/cuisines/new">AddNewFave</a>
+          <a href="/login">Login</a>
+          
+          <a href="/register">Sign Up</a>
+          <% } else { %>
+          
+          <a href="/cuisines/new">AddNewFave</a>
+          <a href="/user/<%=currentUser.id%>"><%= currentUser.username %></a>
+          <a href="/logout">Logout</a>
+          <% } %>
+</div>
+<div class=" container-fluid header-img">
+  <div class="row header-row">
+    <div class="col-lg-3 col-md-3">
+     <!--  <a   href="/">
+       <h4  style="text-align: center; color: #eb1614; height:100% width:100%">Dining <img  style="padding:0px;  "  src="/images/plate.png" height="45" width="45"> Faves</h4></a> -->
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 dining-lights">
+
+  
+
+<!-- <img height="100%" width="100%" src="/images/header.jpg"> -->
+ 
+       <h4  style="text-align: center; "><a  style="color: #eb1614 !important;" href="/">Dining <img  style="padding:0px;  "  src="/images/plate.png" height="45" width="45"> Faves</a></h4>
+
+                   </div>  
+                   <div class="col-lg-3 col-md-3  text-center plate-img" style="padding-top: 5px; padding-bottom: 5px;" >
+
+  
+<a   href="/cuisines">
+
+<img    src="/images/dining.png" height="65" width="65">
+</a>
+
+                   </div>  
+
+                         </div></div>
+                        
+
+
+
+                    
+        
+        <!-- /#page-content-wrapper -->
+
+   
+    <!-- /#wrapper -->
+
+    
+   
+
+
+<!-- <nav class="navbar navbar-expand-md navbar-light bg-light mb-4" >
+  <a class="navbar-brand nav-link disabled" href="/">SCD DIET</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+  
+    <ul class=" navbar-nav mr-auto">
+
+      
+        <li class="nav-item" >
+          <a href="/cuisines" class="nav-link disabled">Home</a>
+        </li>
+         <li class="nav-item" >
+          <a href="/search" class="nav-link disabled"> Recipes on Web </a>
+        </li>
+           
+
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <% if(!currentUser){ %>
+          <li class="nav-item">
+            <a href="/login" class="nav-link disabled">Login</a>
+          </li>
+
+          <li class="nav-item"><a href="/cuisines/new" class="nav-link disabled">Add a new snap</a>
+          </li>
+          
+          <li class="nav-item" >
+            <a href="/register" class="nav-link disabled">Sign Up</a>
+          </li>
+
+      <% } else { %>
+
+          <li class="nav-item">
+            <a href="/user/<%=currentUser.id%>" class="nav-link disabled" ><%= currentUser.username %></a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/cuisines/new" class="nav-link disabled">Add a new snap</a>
+        </li>
+
+          <li class="nav-item">
+            <a href="/logout" class="nav-link disabled">Logout</a>
+          </li>
+        
+      <% } %>
+    </ul>
+    
+</div>
+</nav> -->
+
+  
+
+
+
+
+
+
+
+
+
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+
+
+
+<script>
+
+
+
+
+function openNav() {
+
+var sideNav = $("#mySidenav");
+var mainDiv = $("#main");
+var bodyVar = $("body");
+
+ var sideNavWidth = sideNav.width() == 0 ? "250px" : "0";
+        sideNav.animate({ width: sideNavWidth }, 0);
+
+  // var mainDivMargin =  mainDiv.css("margin-left",  0 ? "250px" : "0");
+  // mainDiv.animate({   })
+  if(sideNav.width() == 0) {
+
+
+      mainDiv.css("margin-left", "+=250px");
+
+      bodyVar.css("background", "rgba(0,0,0,0.4)");
+
+}
+
+else {
+  mainDiv.css("margin-left", "0px");
+  bodyVar.css("background", "#f6f7f4");
+}
+// mainDiv.animate({
+//     mainDivMargin: '250px', 
+// }, "fast");
+
+
+
+// .css("margin-left") = "200px";
+  // $("#main").css.marginLeft == "250px";
+        // mainDiv.animate({ left: mainWidth });
+  
+// $("#content").animate(
+//       {"left": "-=50px"},
+//       "slow");
+
+
+
+ // var bodyBackground = bodyVar.background == '#f6f7f4' ? "rgba(0,0,0,0.4)" : "#f6f7f4";
+ //        bodyVar.animate({ background: bodyBackground });
+
+
+// if(sideNav.style.width = "0") {
+
+// sideNav.css("width", "250px");
+// mainDiv.css("margin-left", "250px");
+// bodyVar.css("background", "rgba(0,0,0,0.4)");
+    // document.getElementById("mySidenav").style.width = "250px";
+    // document.getElementById("main").style.marginLeft = "250px";
+    // document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+
+   
+    // }
+}
+
+// function closeNav() {
+//     document.getElementById("mySidenav").style.width = "0";
+//     document.getElementById("main").style.marginLeft= "0";
+   
+//     document.body.style.backgroundColor = "#f6f7f4";
+//     // document.getElementById("main").style.backgroundColor = "";
+
+//  // document.getElementById("main").addClass("blah");
+
+
+// }
+</script>
+     
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

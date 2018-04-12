@@ -1,0 +1,170 @@
+
+
+
+  <% include ./partials/header%>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+  <!--Material icons-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div id="main">
+  
+  <span class="menu-span">
+  <span class="menu-btn tooltipped" data-position="right" data-tooltip="Menu" data-original-title="" title="" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>  
+<a href="/cuisines"> <i class=" material-icons prefix home-i tooltipped" data-position="right" data-tooltip="Home Page" data-original-title="" title="">home</i></a>          
+<a href="/search"> <i class="material-icons prefix active">restaurant_menu</i></a>
+          <% if(!currentUser){ %>
+          <a href="/cuisines/new"><i class="material-icons prefix tooltipped" data-position="right" data-tooltip="Add a new Fave" data-original-title="" title="">camera_enhance</i></a>
+          <a href="/login"><i class="material-icons tooltipped" data-position="right" data-tooltip="Login" data-original-title="" title="">power_settings_new</i></a>
+          
+          <a href="/register"><i class="material-icons tooltipped" data-position="right" data-tooltip="SignUp" data-original-title="" title="">person_add</i></a>
+          <% } else { %>
+          
+          <a href="/cuisines/new"><i class="material-icons prefix tooltipped" data-position="right" data-tooltip="Add a new Fave" data-original-title="" title="">camera_enhance</i></a>
+
+
+
+          <a href="/user/<%=currentUser.id%>"><i class="material-icons prefix tooltipped" data-position="right" data-tooltip="<%= currentUser.username %>,s profile" data-original-title="" title="">face</i></a>
+          <a href="/logout"><i class="material-icons tooltipped" data-position="right" data-tooltip="Logout" data-original-title="" title="">highlight_off</i></a>
+          <% } %>
+</span>
+
+
+   <div class="container-fluid " >
+
+  <div class="row">
+    <div class='container search '>
+    <div class="col-12 search-col">
+
+        <form method='get'>
+
+<div class="input-field ">
+                  <i class="material-icons prefix ">search</i>
+            
+                    <label for="search" >Search</label>
+                    
+                      <input type="text" name="search" id='search' placeholder="Enter an ingredient..." required>
+                  </div>
+
+        
+
+            <input type='submit' class='btn btn-block' id='SearchButton' value='Search' />
+
+        </form>
+    </div>
+    </div>
+   
+</div>
+
+<div class="container-fluid recipes-container" >
+
+  <div class="row">
+      <% if (typeof recipeHits === 'object') {recipeHits.forEach(function(hit) { %>
+      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 recipes-col">
+      <div class="card-deck">
+
+      <div class="card"  id="<%= hit.recipe.uri.split('_').pop() %>">
+
+        
+        <% console.log(hit.recipe.uri.split('_').pop()) %>
+
+            
+        <a data-toggle="modal" data-target="#a-<%= hit.recipe.uri.split('_').pop() %>">
+               <img class="card-img-top" height="170" width="273" src="<%= hit.recipe.image %>"  alt='<%= hit.recipe.label %>'> 
+            </a>
+
+          <div class="modal" id="a-<%= hit.recipe.uri.split('_').pop() %>" >
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            
+            <div class="modal-content recipe-modal-content">
+                <img  width="70%" height="90%" src="<%= hit.recipe.image %>">
+            
+            </div>
+          </div>
+
+
+        <div class="card-content text-center recipe-title-div">
+        
+
+  
+
+  
+            <span class=" recipe-title activator"><%= hit.recipe.label %></span>
+
+
+            
+            <img  height="26" width="26" src="images/ingredients.png" alt="Likes: " class=" activator rounded material-icons  tooltipped" data-position="top" data-tooltip="View ingredients, Diet, and Health" data-original-title="" title="">
+            
+        </div>
+        <div class="card-action">
+            <a class="btn recipe-btn" href="<%= hit.recipe.url %>" target="_blank">Recipe
+            </a>
+           
+          
+
+            
+        </div>
+        <div class="card-reveal" style="display: none; transform: translateY(0px);">
+            <span class="recipe-title">Ingredients
+                <i class="material-icons right card-title">close
+                </i>
+            </span>
+
+            <% hit.recipe.ingredientLines.forEach(function(ingr) { %>
+
+            <pre class="table"><code><%=  ingr %>.</code></pre>
+
+
+            <% }) %>
+            <h5 class="recipe-title"> Diet/Health </h5>
+              <% hit.recipe.dietLabels.forEach(function(diet) { %>
+
+            <pre class="table"><code><%=  diet %>.</code></pre>
+
+
+            <% }) %>
+            <% hit.recipe.healthLabels.forEach(function(health) { %>
+
+            <pre class="table"><code><%=  health %>.</code></pre>
+
+
+            <% }) %>
+           
+
+        </div>
+    </div>
+</div>
+</div>
+    <% })} %>
+    
+  </div>
+
+</div>
+</div>
+</div>
+</div>
+<% include  ./partials/footer%>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+    
+<script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

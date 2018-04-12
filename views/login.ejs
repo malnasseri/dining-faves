@@ -1,0 +1,102 @@
+<% include  ./partials/header%>
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+  <!--Material icons-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+<div id="main">
+  
+   <span class="menu-span">
+  <span class="menu-btn tooltipped" data-position="right" data-tooltip="Menu" data-original-title="" title="" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>  
+   <a href="/cuisines"> <i class=" material-icons prefix home-i tooltipped" data-position="right" data-tooltip="Home Page" data-original-title="" title="">home</i></a>
+          <a href="/search"> <i class="material-icons prefix tooltipped" data-position="right" data-tooltip="Search for Recipes" data-original-title="" title=""">restaurant_menu</i></a>
+          <% if(!currentUser){ %>
+          <a href="/cuisines/new"><i class="material-icons prefix tooltipped" data-position="right" data-tooltip="Add a new Fave" data-original-title="" title="">camera_enhance</i></a>
+          <a href="/login"><i class="material-icons active">power_settings_new</i></a>
+          
+          <a href="/register"><i class="material-icons tooltipped" data-position="right" data-tooltip="SignUp" data-original-title="" title="">person_add</i></a>
+          <% } else { %>
+          
+          <a href="/cuisines/new"><i class="material-icons prefix tooltipped" data-position="right" data-tooltip="Add a new Fave" data-original-title="" title="">camera_enhance</i></a>
+
+
+
+          <a href="/user/<%=currentUser.id%>"><i class="material-icons prefix tooltipped" data-position="right" data-tooltip="<%= currentUser.username %>,s profile" data-original-title="" title="">face</i></a>
+          <a href="/logout"><i class="material-icons tooltipped" data-position="right" data-tooltip="Logout" data-original-title="" title="">highlight_off</i></a>
+          <% } %>
+</span>
+
+
+   <div class="container login-container">
+<div class="row justify-content-center">
+
+
+<div class="container alert-container">
+  
+  <% if(error && error.length > 0){ %>
+      <div class="alert alert-danger" role="alert">
+          <%= error %>
+      </div>
+  <% } %>
+  <% if(success && success.length > 0){ %>
+      <div class="alert alert-success" role="alert">
+          <%= success %>
+      </div>
+  <% } %>
+</div>
+
+
+
+
+
+    <div class="col-md-6 card login-card ">
+
+
+
+                  
+                   
+
+
+
+                   
+      
+        <form class="form-signin " action="/login" method="post">
+          <h1 class=" login-h1 center">Sign in!</h1>
+<div class="input-field ">
+<i class="material-icons prefix">account_box</i>
+          <label for="inputUsername" >Username</label>
+          <input style="color:white !important" type="text" id="inputUsername" class="form-control mb-3" name="username"  required autofocus>
+</div>
+
+<div class="input-field ">
+          <i class="material-icons prefix">lock</i>
+          <label for="inputPassword" >Password</label>
+          <input style="color:white !important" type="password" id="inputPassword" class="form-control mb-3" name="password"  required>
+          </div> 
+          <button class="btn btn-lg btn-primary btn-block login-btn" type="submit">Sign in</button>
+         
+    </form>
+    
+        
+    </div>
+    
+</div>
+</div>
+
+</div>
+<% include  ./partials/footer %>
+
+
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+
+
+
+
+
+
